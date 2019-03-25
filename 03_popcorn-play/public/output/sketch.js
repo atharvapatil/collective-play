@@ -9,11 +9,12 @@ socket.on('connect', function () {
 // Keep track of users
 let tilt, shake;
 
-let shoot
+let shoot;
 let popCornArray = [];
 let candyArray = [];
 let curtain;
 let x;
+let tiltData, bagPos;
 
 function setup() {
 
@@ -32,6 +33,7 @@ function setup() {
   bag = new Bag(100, height - 120);
   candy=new Target(10, 20);
   candyArray.push(candy);
+  console.log('setup complete')
 }
 
 function mousePressed() {
@@ -55,13 +57,20 @@ function newTarget() {
 function draw() {
   background(220);
   image(curtain, 0, 0);
-  let tiltData = tilt.x
-  let bagPos = map(tiltdata, 0, 180, 0, 600);
 
-  playerX = bagPos - 80
-  bag.x = playerX;
-  bag.show();
+  if(tilt){
+    tiltData = tilt.x
 
+    console.log(tiltData);
+
+    bagPos = map(tiltData, 0, 90, 20, 600);
+
+    // console.log(bagPos);
+
+    playerX = bagPos - 80
+    bag.x = playerX;
+    bag.show();
+  }
   if(shake){
     popC();
   }
@@ -81,5 +90,9 @@ function draw() {
   for(let i = 0; i < candyArray.length; i++) {
     candyArray[i].move();
   }
+
+  // Reset tilt and shake for next frame
+  // tilt = null;
+  shake = null;
 
 }

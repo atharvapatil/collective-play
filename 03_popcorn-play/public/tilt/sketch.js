@@ -9,6 +9,7 @@ socket.on('connect', function () {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER);
+  angleMode(DEGREES);
 }
 
 function draw() {
@@ -49,7 +50,7 @@ function draw() {
   rect(0, height / 2, width, height);
 
   // Normalize lr and tb
-  lr = map(lr, 0, 360, -1, 1);
+  // lr = map(lr, 0, 360, -1, 1);
   tb = map(tb, 0, 120, -1, 1);
 
   //Only send direction of tilt
